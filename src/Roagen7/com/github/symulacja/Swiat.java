@@ -9,7 +9,17 @@ import java.util.Vector;
 public class Swiat {
 
 
+    public int getWysokosc() {
 
+        return wysokosc;
+
+    }
+
+    public int getSzerokosc() {
+
+        return szerokosc;
+
+    }
 
     public enum Ruch {
 
@@ -42,6 +52,7 @@ public class Swiat {
     public void addOrganizm(Organizm organizm){
 
         organizm.setWiek(1);
+        organizm.setSwiat(this);
 
         organizmy.add(organizm);
 

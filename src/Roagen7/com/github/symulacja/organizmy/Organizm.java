@@ -1,6 +1,7 @@
 package Roagen7.com.github.symulacja.organizmy;
 
 import Roagen7.com.github.pomocnicze.Wektor2d;
+import Roagen7.com.github.symulacja.Swiat;
 
 import java.awt.*;
 
@@ -94,6 +95,12 @@ abstract public class Organizm {
 
     }
 
+    public void setSwiat(Swiat swiat) {
+
+        this.swiat = swiat;
+
+    }
+
     @Override
     abstract public String toString();
 
@@ -111,6 +118,8 @@ abstract public class Organizm {
     protected int wiek = 0;
     protected boolean zywy = true;
 
+    protected Swiat swiat;
+
     protected Wektor2d polozenie;
 
     protected Organizm(Wektor2d polozenie, int sila, int inicjatywa){
@@ -126,6 +135,7 @@ abstract public class Organizm {
         return false;
 
     }
+
 
 
 }
