@@ -2,6 +2,8 @@ package Roagen7.com.github.symulacja.organizmy;
 
 import Roagen7.com.github.pomocnicze.Wektor2d;
 
+import java.awt.*;
+
 public class Zwierze extends Organizm{
 
 
@@ -20,11 +22,18 @@ public class Zwierze extends Organizm{
     @Override
     public void akcja() {
 
+        polozenie.dodajEq(new Wektor2d(3,2));
+
     }
 
     @Override
     public void kolizja() {
 
+    }
+
+    @Override
+    public Color rysowanie() {
+        return new Color(255,0,0);
     }
 
     @Override

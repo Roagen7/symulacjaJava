@@ -17,8 +17,13 @@ public class Wizualizacja extends JPanel implements MouseListener {
 
     public static final int ROZMIAR_ZWIERZECIA = 30;
 
+
+
+    private static final Color KOLOR_TLA = new Color(255,255,255);
     private final int wysokosc;
     private final int szerokosc;
+
+
 
     private Swiat swiat;
 
@@ -34,9 +39,19 @@ public class Wizualizacja extends JPanel implements MouseListener {
 
     }
 
+    public void nastepnaTura(){
+
+            swiat.wykonajTure();
+            paint(this.getGraphics());
+
+    }
+
 
     @Override
     public void paint(Graphics g){
+
+        g.setColor(KOLOR_TLA);
+        g.fillRect(0,0,szerokosc,wysokosc);
 
 
         for(int y = 0; y < wysokosc/ROZMIAR_ZWIERZECIA; y++){
@@ -49,7 +64,7 @@ public class Wizualizacja extends JPanel implements MouseListener {
 
                 if(org != null){
                     System.out.println(y + " " + x);
-                    g.setColor(new Color(255,0,0));
+                    g.setColor(org.rysowanie());
 
                     g.fillRect(x*ROZMIAR_ZWIERZECIA,y*ROZMIAR_ZWIERZECIA,ROZMIAR_ZWIERZECIA, ROZMIAR_ZWIERZECIA);
 

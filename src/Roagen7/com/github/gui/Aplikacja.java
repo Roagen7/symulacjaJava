@@ -4,6 +4,8 @@ import Roagen7.com.github.symulacja.Swiat;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Aplikacja extends JFrame {
 
@@ -47,7 +49,6 @@ public class Aplikacja extends JFrame {
     private JMenuItem menuItemWczytaj;
     private JMenuItem menuItemZapisz;
 
-    private JPanel panelGlowny;
     private JPanel panelGuziki;
 
     private Wizualizacja wizualizacja;
@@ -83,8 +84,24 @@ public class Aplikacja extends JFrame {
     private void inicjujPanelGlowny(){
 
 
+        JButton tura = new JButton("nastepna tura");
+
+        tura.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                wizualizacja.nastepnaTura();
+
+            }
+
+        });
+
+
         panelGuziki = new JPanel();
-        panelGuziki.add(new JButton("nastepna tura"));
+
+
+
+        panelGuziki.add(tura);
 
         JSplitPane splitPane = new JSplitPane();
 

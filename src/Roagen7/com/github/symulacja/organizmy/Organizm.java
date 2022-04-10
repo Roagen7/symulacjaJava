@@ -2,6 +2,8 @@ package Roagen7.com.github.symulacja.organizmy;
 
 import Roagen7.com.github.pomocnicze.Wektor2d;
 
+import java.awt.*;
+
 abstract public class Organizm {
 
 
@@ -79,19 +81,34 @@ abstract public class Organizm {
     }
 
 
+    public void starzejSie() {
+
+        wiek++;
+
+    }
+
+
+    public void setWiek(int wiek) {
+
+        this.wiek = wiek;
+
+    }
 
     @Override
     abstract public String toString();
 
     public abstract void akcja();
     public abstract void kolizja();
+    public abstract Color rysowanie();
+
+
     public abstract void nowaTura();
 
 
 
     protected int sila;
     protected int inicjatywa;
-    protected int wiek;
+    protected int wiek = 0;
     protected boolean zywy = true;
 
     protected Wektor2d polozenie;
@@ -109,7 +126,6 @@ abstract public class Organizm {
         return false;
 
     }
-
 
 
 }
