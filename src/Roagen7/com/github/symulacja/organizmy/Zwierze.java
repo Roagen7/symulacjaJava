@@ -7,7 +7,7 @@ import java.awt.*;
 import static java.lang.Math.PI;
 import static java.lang.Math.random;
 
-public class Zwierze extends Organizm{
+abstract public class Zwierze extends Organizm{
 
 
     public Zwierze(Wektor2d polozenie, int sila, int inicjatywa){
@@ -16,11 +16,6 @@ public class Zwierze extends Organizm{
 
     }
 
-
-    @Override
-    public String toString() {
-        return "ZWIERZE";
-    }
 
     @Override
     public void akcja() {
@@ -46,10 +41,7 @@ public class Zwierze extends Organizm{
 
     }
 
-    @Override
-    public Color rysowanie() {
-        return new Color(255,0,0);
-    }
+
 
     @Override
     public void nowaTura() {
@@ -58,12 +50,7 @@ public class Zwierze extends Organizm{
 
     }
 
-    @Override
-    protected Zwierze kopia(){
 
-        return new Zwierze(polozenie,sila,inicjatywa);
-
-    }
 
 
     protected void losowyRuch(int zasieg){
@@ -82,13 +69,17 @@ public class Zwierze extends Organizm{
 
             zmienPolozenie(przemieszczenie);
 
-        } while(wczesniejsze.equals(polozenie));
+
+        } while(wczesniejsze.equals(polozenie) ||
+                (czyMaDobryWech() &&
+                swiat.getOrganizmNaPozycji(polozenie) != null &&
+                swiat.getOrganizmNaPozycji(polozenie).getSila() > getSila()));
 
     }
 
     protected void zmienPolozenie(Wektor2d przemieszczenie){
 
-        if(!polozenie.dodaj(przemieszczenie).pozaGranicami(swiat.getWysokosc(),swiat.getSzerokosc())){
+        if(!polozenie.dodaj(przemieszczenie).pozaGranicami(swiat.getWysokosc() - 5,swiat.getSzerokosc())){
 
             wczesniejszePolozenie = new Wektor2d(polozenie.getY(),polozenie.getX());
             polozenie.dodajEq(przemieszczenie);
@@ -102,6 +93,9 @@ public class Zwierze extends Organizm{
     private Wektor2d wczesniejszePolozenie;
 
     void walcz(Organizm drugi){
+
+        if(ucieczka() || drugi.ucieczka()) return;
+
 
         if(getSila() < drugi.getSila()){
 
@@ -158,7 +152,7 @@ public class Zwierze extends Organizm{
         }
 
         org.setPolozenie(miejsceNarodzin);
-        org.setWiek(0);
+        org.setWiek(-1);
 
         swiat.addOrganizm(org);
 

@@ -6,7 +6,8 @@ import Roagen7.com.github.symulacja.Swiat;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
 import Roagen7.com.github.symulacja.organizmy.Roslina;
 import Roagen7.com.github.symulacja.organizmy.Zwierze;
-import Roagen7.com.github.symulacja.organizmy.rosliny.Trawa;
+import Roagen7.com.github.symulacja.organizmy.rosliny.*;
+import Roagen7.com.github.symulacja.organizmy.zwierzeta.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,11 +16,9 @@ import java.awt.event.MouseListener;
 
 public class Wizualizacja extends JPanel implements MouseListener {
 
-    public static final int ROZMIAR_ZWIERZECIA = 10;
+    public static final int ROZMIAR_ZWIERZECIA = 20;
 
-
-
-    private static final Color KOLOR_TLA = new Color(255,255,255);
+    private static final Color KOLOR_TLA = new Color(0,0,0);
     private final int wysokosc;
     private final int szerokosc;
 
@@ -34,10 +33,27 @@ public class Wizualizacja extends JPanel implements MouseListener {
                 Aplikacja.DOMYSLNA_WYSOKOSC / ROZMIAR_ZWIERZECIA,
                 Aplikacja.DOMYSLNA_SZEROKOSC/ ROZMIAR_ZWIERZECIA);
 
-        swiat.addOrganizm(new Zwierze(new Wektor2d(0,3),2,2));
-        swiat.addOrganizm(new Zwierze(new Wektor2d(0,4),2,2));
+        swiat.addOrganizm(new Wilk(new Wektor2d(0,3)));
+        swiat.addOrganizm(new Wilk(new Wektor2d(0,4)));
 
+        swiat.addOrganizm(new Owca(new Wektor2d(6,6)));
+        swiat.addOrganizm(new Owca(new Wektor2d(7,6)));
+        swiat.addOrganizm(new Mlecz(new Wektor2d(10,10)));
+        swiat.addOrganizm(new Lis(new Wektor2d(10,5)));
+        swiat.addOrganizm(new Lis(new Wektor2d(10,6)));
+        swiat.addOrganizm(new Lis(new Wektor2d(10,7)));
+        swiat.addOrganizm(new Zolw(new Wektor2d(20,20)));
         swiat.addOrganizm(new Trawa(new Wektor2d(20,4)));
+        swiat.addOrganizm(new Antylopa(new Wektor2d(30,5)));
+        swiat.addOrganizm(new Antylopa(new Wektor2d(30,6)));
+        swiat.addOrganizm(new Guarana(new Wektor2d(25,5)));
+        swiat.addOrganizm(new Guarana(new Wektor2d(25,6)));
+
+        swiat.addOrganizm(new WilczeJagody(new Wektor2d(0,0)));
+        swiat.addOrganizm(new WilczeJagody(new Wektor2d(1,0)));
+
+        swiat.addOrganizm(new BarszczSosnowskiego(new Wektor2d(21,24)));
+
 
     }
 
@@ -70,8 +86,6 @@ public class Wizualizacja extends JPanel implements MouseListener {
             for(int x = 0; x < szerokosc/ROZMIAR_ZWIERZECIA; x++){
 
                 Organizm org = swiat.getOrganizmNaPozycji(new Wektor2d(y,x));
-
-
 
                 if(org != null){
 

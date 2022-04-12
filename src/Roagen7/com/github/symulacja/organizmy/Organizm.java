@@ -47,6 +47,8 @@ abstract public class Organizm {
 
     public void zabij(){
 
+        swiat.getDziennik().wpisz(toString() + " umiera");
+
         zywy = false;
 
     }
@@ -75,7 +77,20 @@ abstract public class Organizm {
 
     public boolean ucieczka(){
 
-        //TODO ucieczka z pola(dla antylopy)
+        if(czyUciekl()){
+
+            Wektor2d nowePole = swiat.getWolnePoleObok(polozenie);
+
+            if(nowePole == polozenie){
+
+                return false;
+
+            }
+
+            setPolozenie(nowePole);
+            return true;
+
+        }
 
         return false;
 

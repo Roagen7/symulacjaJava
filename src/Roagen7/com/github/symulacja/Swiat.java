@@ -103,7 +103,7 @@ public class Swiat {
 
     public void addOrganizm(Organizm organizm){
 
-        organizm.setWiek(1);
+        organizm.setWiek(organizm.getWiek()+1);
         organizm.setSwiat(this);
 
         organizmy.add(organizm);
