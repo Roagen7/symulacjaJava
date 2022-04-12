@@ -2,6 +2,7 @@ package Roagen7.com.github.symulacja;
 
 import Roagen7.com.github.pomocnicze.Wektor2d;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
+import Roagen7.com.github.symulacja.organizmy.Zwierze;
 
 import java.util.Collections;
 import java.util.Vector;
@@ -18,6 +19,49 @@ public class Swiat {
     public int getSzerokosc() {
 
         return szerokosc;
+
+    }
+
+    public Organizm getKolidujacy(Organizm org) {
+
+        for(Organizm organizm : organizmy){
+
+            if(org.getPolozenie().equals(organizm.getPolozenie())
+            && org != organizm
+            && org.isZywy()){
+
+                return organizm;
+
+            }
+
+        }
+
+        return null;
+
+    }
+
+    public Wektor2d getWolnePoleObok(Wektor2d p) {
+
+        for(int dy = -1; dy <= 1; dy++){
+
+            for(int dx = -1; dx <= 1; dx++){
+
+                Wektor2d sprawdzanyPunkt = new Wektor2d(p.getY() + dy, p.getX() + dx);
+
+                if(!sprawdzanyPunkt.equals(p)
+                && getOrganizmNaPozycji(sprawdzanyPunkt) == null
+                && !sprawdzanyPunkt.pozaGranicami(wysokosc,szerokosc)){
+
+                    return sprawdzanyPunkt;
+
+                }
+
+
+            }
+
+
+        }
+        return p;
 
     }
 
@@ -42,7 +86,7 @@ public class Swiat {
 
     public void wykonajTure(){
 
-
+        oglosNowaTure();
         nrTury++;
         ruchOrganizmow();
         pozbadzSieZwlok();
@@ -127,6 +171,12 @@ public class Swiat {
 
     private void oglosNowaTure(){
 
+        for(Organizm organizm : organizmy){
+
+
+            organizm.nowaTura();
+
+        }
 
 
     }

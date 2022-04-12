@@ -137,5 +137,7 @@ abstract public class Organizm {
     }
 
 
+    abstract protected Organizm kopia();
+
 
 }

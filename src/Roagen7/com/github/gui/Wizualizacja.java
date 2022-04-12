@@ -3,26 +3,23 @@ package Roagen7.com.github.gui;
 import Roagen7.com.github.pomocnicze.Wektor2d;
 import Roagen7.com.github.symulacja.Swiat;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
+import Roagen7.com.github.symulacja.organizmy.Roslina;
 import Roagen7.com.github.symulacja.organizmy.Zwierze;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Vector;
-
-import static java.lang.Math.random;
 
 public class Wizualizacja extends JPanel implements MouseListener {
 
-    public static final int ROZMIAR_ZWIERZECIA = 30;
+    public static final int ROZMIAR_ZWIERZECIA = 10;
 
 
 
     private static final Color KOLOR_TLA = new Color(255,255,255);
     private final int wysokosc;
     private final int szerokosc;
-
 
 
     private Swiat swiat;
@@ -36,6 +33,11 @@ public class Wizualizacja extends JPanel implements MouseListener {
                 Aplikacja.DOMYSLNA_SZEROKOSC/ ROZMIAR_ZWIERZECIA);
 
         swiat.addOrganizm(new Zwierze(new Wektor2d(0,3),2,2));
+        swiat.addOrganizm(new Zwierze(new Wektor2d(0,4),2,2));
+
+        swiat.addOrganizm(new Roslina(new Wektor2d(20,4),0));
+
+
 
     }
 
