@@ -19,7 +19,7 @@ public class Zwierze extends Organizm{
 
     @Override
     public String toString() {
-        return "z";
+        return "ZWIERZE";
     }
 
     @Override

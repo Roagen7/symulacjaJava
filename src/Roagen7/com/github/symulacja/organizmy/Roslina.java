@@ -6,7 +6,7 @@ import java.awt.*;
 
 import static java.lang.Math.random;
 
-public class Roslina extends Organizm{
+public abstract class Roslina extends Organizm{
 
     static final int DOMYSLNA_INICJATYWA = 0;
     static final double P_ROZSIANIA = 0.05;
@@ -16,10 +16,7 @@ public class Roslina extends Organizm{
         super(polozenie, sila, DOMYSLNA_INICJATYWA);
     }
 
-    @Override
-    public String toString() {
-        return "r";
-    }
+
 
     @Override
     public void akcja() {
@@ -33,19 +30,11 @@ public class Roslina extends Organizm{
 
     }
 
-    @Override
-    public Color rysowanie() {
-        return Color.GREEN;
-    }
+
 
     @Override
     public void nowaTura() {
 
-    }
-
-    @Override
-    protected Organizm kopia() {
-        return new Roslina(polozenie,sila);
     }
 
     protected void rozsiej(){

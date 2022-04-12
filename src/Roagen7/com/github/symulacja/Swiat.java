@@ -150,7 +150,6 @@ public class Swiat {
 
             }
 
-
             return o1.getInicjatywa() - o2.getInicjatywa() ;
         });
 
@@ -184,10 +183,8 @@ public class Swiat {
                 break;
 
             }
+
         }
-
-
-
 
     }
 
@@ -200,7 +197,6 @@ public class Swiat {
             organizm.nowaTura();
 
         }
-
 
     }
 

@@ -6,6 +6,7 @@ import Roagen7.com.github.symulacja.Swiat;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
 import Roagen7.com.github.symulacja.organizmy.Roslina;
 import Roagen7.com.github.symulacja.organizmy.Zwierze;
+import Roagen7.com.github.symulacja.organizmy.rosliny.Trawa;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +37,7 @@ public class Wizualizacja extends JPanel implements MouseListener {
         swiat.addOrganizm(new Zwierze(new Wektor2d(0,3),2,2));
         swiat.addOrganizm(new Zwierze(new Wektor2d(0,4),2,2));
 
-        swiat.addOrganizm(new Roslina(new Wektor2d(20,4),0));
+        swiat.addOrganizm(new Trawa(new Wektor2d(20,4)));
 
     }
 
