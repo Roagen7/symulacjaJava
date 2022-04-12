@@ -112,6 +112,8 @@ public class Zwierze extends Organizm{
 
             }
 
+            swiat.getDziennik().wpisz(drugi.toString() + " zjada " + toString());
+
             zabij();
             dodajModyfikator(drugi);
 
@@ -123,6 +125,8 @@ public class Zwierze extends Organizm{
                 return;
 
             }
+
+            swiat.getDziennik().wpisz(toString() + " zjada " + drugi.toString());
 
             drugi.zabij();
             drugi.dodajModyfikator(this);

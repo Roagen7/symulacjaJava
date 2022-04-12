@@ -1,5 +1,6 @@
 package Roagen7.com.github.symulacja;
 
+import Roagen7.com.github.pomocnicze.Dziennik;
 import Roagen7.com.github.pomocnicze.Wektor2d;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
 import Roagen7.com.github.symulacja.organizmy.Zwierze;
@@ -65,6 +66,12 @@ public class Swiat {
 
     }
 
+    public Dziennik getDziennik() {
+
+        return dziennik;
+
+    }
+
     public enum Ruch {
 
         GORA,
@@ -81,6 +88,7 @@ public class Swiat {
         this.wysokosc = wysokosc;
         this.szerokosc = szerokosc;
         organizmy = new Vector<>();
+        dziennik = new Dziennik();
 
     }
 
@@ -121,11 +129,13 @@ public class Swiat {
     }
 
 
-    private int wysokosc;
-    private int szerokosc;
+    private final int wysokosc;
+    private final int szerokosc;
 
     private int nrTury;
     private Ruch ruch = Ruch.STOJ;
+
+    private Dziennik dziennik;
 
     Vector<Organizm> organizmy;
 
@@ -165,14 +175,27 @@ public class Swiat {
 
     private void pozbadzSieZwlok(){
 
+        for(int i = 0; i < organizmy.size(); i++){
+
+            if(!organizmy.get(i).isZywy()){
+
+                organizmy.remove(i);
+                pozbadzSieZwlok();
+                break;
+
+            }
+        }
+
+
 
 
     }
 
     private void oglosNowaTure(){
 
-        for(Organizm organizm : organizmy){
+        dziennik.czysc();
 
+        for(Organizm organizm : organizmy){
 
             organizm.nowaTura();
 

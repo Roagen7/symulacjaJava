@@ -1,5 +1,6 @@
 package Roagen7.com.github.gui;
 
+import Roagen7.com.github.pomocnicze.Dziennik;
 import Roagen7.com.github.pomocnicze.Wektor2d;
 import Roagen7.com.github.symulacja.Swiat;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
@@ -37,14 +38,21 @@ public class Wizualizacja extends JPanel implements MouseListener {
 
         swiat.addOrganizm(new Roslina(new Wektor2d(20,4),0));
 
+    }
 
+    public Dziennik getDziennik(){
+
+        return swiat.getDziennik();
 
     }
+
 
     public void nastepnaTura(){
 
             swiat.wykonajTure();
             paint(this.getGraphics());
+            System.out.print(swiat.getDziennik().wypisz());
+
 
     }
 
@@ -65,7 +73,7 @@ public class Wizualizacja extends JPanel implements MouseListener {
 
 
                 if(org != null){
-                    System.out.println(y + " " + x);
+
                     g.setColor(org.rysowanie());
 
                     g.fillRect(x*ROZMIAR_ZWIERZECIA,y*ROZMIAR_ZWIERZECIA,ROZMIAR_ZWIERZECIA, ROZMIAR_ZWIERZECIA);

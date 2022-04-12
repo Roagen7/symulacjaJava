@@ -30,7 +30,6 @@ public class Aplikacja extends JFrame {
         inicjujPanelGlowny();
 
 
-
     }
 
 
@@ -42,33 +41,24 @@ public class Aplikacja extends JFrame {
     }
 
 
-
-    private JMenuBar menuBar;
-
-    private JMenuItem menuItemBazowy;
-    private JMenuItem menuItemWczytaj;
-    private JMenuItem menuItemZapisz;
-
-    private JPanel panelGuziki;
-
-    private Wizualizacja wizualizacja;
-
+    private final Wizualizacja wizualizacja;
+    JButton turaButton;
+    JButton dziennikButton;
 
     private void inicjujMenuGorne(){
 
-        menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
 
         JMenu menuNowy = new JMenu("Nowy");
         JMenu menuPlik = new JMenu("Plik");
 
 
-
-        menuItemBazowy = new JMenuItem("bazowy");
+        JMenuItem menuItemBazowy = new JMenuItem("bazowy");
 
         menuNowy.add(menuItemBazowy);
 
-        menuItemWczytaj = new JMenuItem("wczytaj");
-        menuItemZapisz = new JMenuItem("zapisz");
+        JMenuItem menuItemWczytaj = new JMenuItem("wczytaj");
+        JMenuItem menuItemZapisz = new JMenuItem("zapisz");
 
         menuPlik.add(menuItemWczytaj);
         menuPlik.add(menuItemZapisz);
@@ -84,24 +74,14 @@ public class Aplikacja extends JFrame {
     private void inicjujPanelGlowny(){
 
 
-        JButton tura = new JButton("nastepna tura");
+       inicjujGuziki();
 
-        tura.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-                wizualizacja.nastepnaTura();
-
-            }
-
-        });
-
-
-        panelGuziki = new JPanel();
+        JPanel panelGuziki = new JPanel();
 
 
 
-        panelGuziki.add(tura);
+        panelGuziki.add(turaButton);
+        panelGuziki.add(dziennikButton);
 
         JSplitPane splitPane = new JSplitPane();
 
@@ -115,6 +95,36 @@ public class Aplikacja extends JFrame {
         splitPane.setBottomComponent(panelGuziki);
 
         add(splitPane);
+
+    }
+
+    private void inicjujGuziki(){
+
+        turaButton = new JButton("nastepna tura");
+        dziennikButton = new JButton("dziennik");
+
+
+        turaButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                wizualizacja.nastepnaTura();
+
+            }
+
+        });
+
+        dziennikButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JOptionPane.showConfirmDialog(null,wizualizacja.getDziennik().wypisz(),"Dziennik", JOptionPane.DEFAULT_OPTION);
+            }
+
+        });
+
+
 
     }
 
