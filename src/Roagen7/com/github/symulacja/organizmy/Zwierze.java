@@ -55,6 +55,12 @@ abstract public class Zwierze extends Organizm{
 
     protected void losowyRuch(int zasieg){
 
+        if(czyMaDobryWech() && wszyscySasiedziSilniejsi()){
+
+            return;
+
+        }
+
         int[] koordynaty = {-1 * zasieg, 0, zasieg};
 
         Wektor2d przemieszczenie = new Wektor2d(0,0);
@@ -69,17 +75,16 @@ abstract public class Zwierze extends Organizm{
 
             zmienPolozenie(przemieszczenie);
 
-
         } while(wczesniejsze.equals(polozenie) ||
                 (czyMaDobryWech() &&
-                swiat.getOrganizmNaPozycji(polozenie) != null &&
-                swiat.getOrganizmNaPozycji(polozenie).getSila() > getSila()));
+                swiat.getKolidujacy(this) != null &&
+                swiat.getKolidujacy(this).getSila() > getSila()));
 
     }
 
     protected void zmienPolozenie(Wektor2d przemieszczenie){
 
-        if(!polozenie.dodaj(przemieszczenie).pozaGranicami(swiat.getWysokosc() - 5,swiat.getSzerokosc())){
+        if(!polozenie.dodaj(przemieszczenie).pozaGranicami(swiat.getWysokosc(),swiat.getSzerokosc())){
 
             wczesniejszePolozenie = new Wektor2d(polozenie.getY(),polozenie.getX());
             polozenie.dodajEq(przemieszczenie);
@@ -92,7 +97,7 @@ abstract public class Zwierze extends Organizm{
     private boolean rozmnozylSie = false;
     private Wektor2d wczesniejszePolozenie;
 
-    void walcz(Organizm drugi){
+    private void walcz(Organizm drugi){
 
         if(ucieczka() || drugi.ucieczka()) return;
 
@@ -130,7 +135,7 @@ abstract public class Zwierze extends Organizm{
 
     }
 
-    void rozmnozSie(Zwierze drugi){
+    private void rozmnozSie(Zwierze drugi){
 
         if(drugi.getWiek() == 0){
 
@@ -165,10 +170,34 @@ abstract public class Zwierze extends Organizm{
 
     }
 
-    void cofnijSie(){
+    private void cofnijSie(){
 
         setPolozenie(wczesniejszePolozenie);
 
+
+    }
+
+    private boolean wszyscySasiedziSilniejsi(){
+
+        for(int y = -1; y <= 1; y++){
+
+            for(int x = -1; x <= 1; x++){
+
+                Wektor2d pol = new Wektor2d(y,x);
+
+                Organizm org = swiat.getOrganizmNaPozycji(polozenie.dodaj(pol));
+
+                if(org != this && (org == null || org.getSila() <= sila)){
+
+                    return false;
+
+                }
+
+            }
+
+        }
+
+        return true;
 
     }
 

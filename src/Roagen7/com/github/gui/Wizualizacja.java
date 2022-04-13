@@ -4,8 +4,6 @@ import Roagen7.com.github.pomocnicze.Dziennik;
 import Roagen7.com.github.pomocnicze.Wektor2d;
 import Roagen7.com.github.symulacja.Swiat;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
-import Roagen7.com.github.symulacja.organizmy.Roslina;
-import Roagen7.com.github.symulacja.organizmy.Zwierze;
 import Roagen7.com.github.symulacja.organizmy.rosliny.*;
 import Roagen7.com.github.symulacja.organizmy.zwierzeta.*;
 
@@ -16,22 +14,22 @@ import java.awt.event.MouseListener;
 
 public class Wizualizacja extends JPanel implements MouseListener {
 
-    public static final int ROZMIAR_ZWIERZECIA = 20;
 
-    private static final Color KOLOR_TLA = new Color(0,0,0);
-    private final int wysokosc;
-    private final int szerokosc;
+
 
 
     private Swiat swiat;
 
-    public Wizualizacja(int wysokosc, int szerokosc) {
+    public Wizualizacja(int wysokosc, int szerokosc, int wysokoscOkienka) {
+
         this.wysokosc = wysokosc;
         this.szerokosc = szerokosc;
+        this.wysokoscOkienka = wysokoscOkienka;
+
 
         swiat = new Swiat(
-                Aplikacja.DOMYSLNA_WYSOKOSC / ROZMIAR_ZWIERZECIA,
-                Aplikacja.DOMYSLNA_SZEROKOSC/ ROZMIAR_ZWIERZECIA);
+                this.wysokosc,
+                this.szerokosc);
 
         swiat.addOrganizm(new Wilk(new Wektor2d(0,3)));
         swiat.addOrganizm(new Wilk(new Wektor2d(0,4)));
@@ -78,12 +76,14 @@ public class Wizualizacja extends JPanel implements MouseListener {
     public void paint(Graphics g){
 
         g.setColor(KOLOR_TLA);
-        g.fillRect(0,0,szerokosc,wysokosc);
 
 
-        for(int y = 0; y < wysokosc/ROZMIAR_ZWIERZECIA; y++){
+        int rozmiarZwierzecia = wysokoscOkienka/wysokosc;
+        g.fillRect(0,0,szerokosc * rozmiarZwierzecia,wysokosc * rozmiarZwierzecia);
 
-            for(int x = 0; x < szerokosc/ROZMIAR_ZWIERZECIA; x++){
+        for(int y = 0; y < wysokosc; y++){
+
+            for(int x = 0; x < szerokosc; x++){
 
                 Organizm org = swiat.getOrganizmNaPozycji(new Wektor2d(y,x));
 
@@ -91,7 +91,7 @@ public class Wizualizacja extends JPanel implements MouseListener {
 
                     g.setColor(org.rysowanie());
 
-                    g.fillRect(x*ROZMIAR_ZWIERZECIA,y*ROZMIAR_ZWIERZECIA,ROZMIAR_ZWIERZECIA, ROZMIAR_ZWIERZECIA);
+                    g.fillRect(x* rozmiarZwierzecia,y* rozmiarZwierzecia, rozmiarZwierzecia, rozmiarZwierzecia);
 
                 }
 
@@ -132,4 +132,12 @@ public class Wizualizacja extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent mouseEvent) {
 
     }
+
+
+    private static final Color KOLOR_TLA = new Color(0,0,0);
+    private final int wysokosc;
+    private final int szerokosc;
+
+    private final int wysokoscOkienka;
+
 }

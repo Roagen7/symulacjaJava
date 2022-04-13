@@ -18,13 +18,14 @@ public class Aplikacja extends JFrame {
     public Aplikacja(int wysokosc, int szerokosc){
 
         setSize(szerokosc,wysokosc);
+        setMinimumSize(new Dimension(szerokosc,wysokosc));
+
+        revalidate();
+
         setTitle(TYTUL);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        setResizable(false);
-
-        wizualizacja = new Wizualizacja(DOMYSLNA_WYSOKOSC * 9/10, DOMYSLNA_SZEROKOSC);
-
+        wizualizacja = new Wizualizacja(40,50,DOMYSLNA_WYSOKOSC * 9/10);
 
         inicjujMenuGorne();
         inicjujPanelGlowny();
