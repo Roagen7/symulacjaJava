@@ -25,7 +25,7 @@ public class Aplikacja extends JFrame {
         setTitle(TYTUL);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        wizualizacja = new Wizualizacja(40,50,DOMYSLNA_WYSOKOSC * 9/10);
+        wizualizacja = new Wizualizacja(30,30,DOMYSLNA_WYSOKOSC * 9/10);
 
         inicjujMenuGorne();
         inicjujPanelGlowny();

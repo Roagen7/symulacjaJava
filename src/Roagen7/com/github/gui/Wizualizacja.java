@@ -9,13 +9,12 @@ import Roagen7.com.github.symulacja.organizmy.zwierzeta.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Wizualizacja extends JPanel implements MouseListener {
-
-
-
+public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
 
     private Swiat swiat;
@@ -26,6 +25,9 @@ public class Wizualizacja extends JPanel implements MouseListener {
         this.szerokosc = szerokosc;
         this.wysokoscOkienka = wysokoscOkienka;
 
+        addKeyListener(this);
+        setFocusable(true);
+        setFocusTraversalKeysEnabled(true);
 
         swiat = new Swiat(
                 this.wysokosc,
@@ -51,7 +53,7 @@ public class Wizualizacja extends JPanel implements MouseListener {
         swiat.addOrganizm(new WilczeJagody(new Wektor2d(1,0)));
 
         swiat.addOrganizm(new BarszczSosnowskiego(new Wektor2d(21,24)));
-
+        swiat.addOrganizm(new Czlowiek(new Wektor2d(25,25)));
 
     }
 
@@ -68,7 +70,7 @@ public class Wizualizacja extends JPanel implements MouseListener {
             paint(this.getGraphics());
             System.out.print(swiat.getDziennik().wypisz());
 
-
+            requestFocus();
     }
 
 
@@ -133,11 +135,51 @@ public class Wizualizacja extends JPanel implements MouseListener {
 
     }
 
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+
+
+        System.out.println("ruch");
+
+        switch(keyEvent.getKeyCode()){
+
+            case KeyEvent.VK_UP:
+                swiat.setRuch(Swiat.Ruch.GORA);
+                break;
+
+            case KeyEvent.VK_DOWN:
+                swiat.setRuch(Swiat.Ruch.DOL);
+                break;
+
+            case KeyEvent.VK_LEFT:
+                swiat.setRuch(Swiat.Ruch.LEWO);
+                break;
+
+            case KeyEvent.VK_RIGHT:
+                swiat.setRuch(Swiat.Ruch.PRAWO);
+                break;
+
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+
+    }
+
+
 
     private static final Color KOLOR_TLA = new Color(0,0,0);
     private final int wysokosc;
     private final int szerokosc;
 
     private final int wysokoscOkienka;
+
 
 }

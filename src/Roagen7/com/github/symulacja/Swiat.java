@@ -128,6 +128,21 @@ public class Swiat {
 
     }
 
+    public void setRuch(Ruch ruch){
+
+        this.ruch = ruch;
+
+    }
+
+    public Ruch popRuch(){
+
+        Ruch obecny = ruch;
+        ruch = Ruch.STOJ;
+
+        return obecny;
+
+    }
+
 
     private final int wysokosc;
     private final int szerokosc;
