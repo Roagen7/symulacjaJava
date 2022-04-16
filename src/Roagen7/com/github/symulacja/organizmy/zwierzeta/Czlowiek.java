@@ -6,11 +6,15 @@ import Roagen7.com.github.symulacja.organizmy.Zwierze;
 
 import java.awt.*;
 
+import static java.lang.Math.random;
+
 public class Czlowiek extends Zwierze {
 
     public static final int SILA = 5;
     public static final int INICJATYWA = 4;
-
+    public static final int SPECJALNY_TURY = 5;
+    public static final int SPECJALNY_MNIEJ = 2;
+    public static final double P_MNIEJ = 0.5;
 
 
     public Czlowiek(Wektor2d polozenie) {
@@ -20,7 +24,33 @@ public class Czlowiek extends Zwierze {
     @Override
     public void akcja(){
 
-        int zasieg = 1;
+        int zasieg;
+
+        if(turySpecjalne == 0){
+
+            zasieg = 1;
+
+        } else if(turySpecjalne > SPECJALNY_MNIEJ){
+
+            zasieg = Antylopa.ZASIEG;
+            turySpecjalne--;
+
+
+        } else {
+
+            if(random() < P_MNIEJ){
+
+                zasieg = Antylopa.ZASIEG;
+
+            } else {
+
+                zasieg = 1;
+
+            }
+
+            turySpecjalne--;
+
+        }
 
         switch(swiat.popRuch()){
 
@@ -40,9 +70,23 @@ public class Czlowiek extends Zwierze {
                 zmienPolozenie(new Wektor2d(0, -1 * zasieg));
                 break;
 
+            case SPECJALNY:
+
+                if(turySpecjalne == 0){
+
+                    turySpecjalne = SPECJALNY_TURY;
+
+                }
+
+                break;
 
         }
 
+    }
+
+    public void setTurySpecjalne(int turySpecjalne){
+
+        this.turySpecjalne = turySpecjalne;
 
     }
 
@@ -61,5 +105,7 @@ public class Czlowiek extends Zwierze {
     protected Organizm kopia() {
         return new Czlowiek(polozenie);
     }
+
+    private int turySpecjalne = 0;
 
 }

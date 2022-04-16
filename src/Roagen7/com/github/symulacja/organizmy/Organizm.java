@@ -141,6 +141,7 @@ abstract public class Organizm {
 
         this.polozenie = polozenie;
         this.sila = sila;
+        this.inicjatywa = inicjatywa;
 
     }
 

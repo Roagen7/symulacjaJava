@@ -17,7 +17,7 @@ import java.awt.event.MouseListener;
 public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
 
-    private Swiat swiat;
+
 
     public Wizualizacja(int wysokosc, int szerokosc, int wysokoscOkienka) {
 
@@ -29,31 +29,7 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
         setFocusable(true);
         setFocusTraversalKeysEnabled(true);
 
-        swiat = new Swiat(
-                this.wysokosc,
-                this.szerokosc);
-
-        swiat.addOrganizm(new Wilk(new Wektor2d(0,3)));
-        swiat.addOrganizm(new Wilk(new Wektor2d(0,4)));
-
-        swiat.addOrganizm(new Owca(new Wektor2d(6,6)));
-        swiat.addOrganizm(new Owca(new Wektor2d(7,6)));
-        swiat.addOrganizm(new Mlecz(new Wektor2d(10,10)));
-        swiat.addOrganizm(new Lis(new Wektor2d(10,5)));
-        swiat.addOrganizm(new Lis(new Wektor2d(10,6)));
-        swiat.addOrganizm(new Lis(new Wektor2d(10,7)));
-        swiat.addOrganizm(new Zolw(new Wektor2d(20,20)));
-        swiat.addOrganizm(new Trawa(new Wektor2d(20,4)));
-        swiat.addOrganizm(new Antylopa(new Wektor2d(30,5)));
-        swiat.addOrganizm(new Antylopa(new Wektor2d(30,6)));
-        swiat.addOrganizm(new Guarana(new Wektor2d(25,5)));
-        swiat.addOrganizm(new Guarana(new Wektor2d(25,6)));
-
-        swiat.addOrganizm(new WilczeJagody(new Wektor2d(0,0)));
-        swiat.addOrganizm(new WilczeJagody(new Wektor2d(1,0)));
-
-        swiat.addOrganizm(new BarszczSosnowskiego(new Wektor2d(21,24)));
-        swiat.addOrganizm(new Czlowiek(new Wektor2d(25,25)));
+       swiat = Swiat.Bazowy();
 
     }
 
@@ -73,15 +49,29 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
             requestFocus();
     }
 
+    public boolean maCzlowieka(){
+
+        for(Organizm org : swiat.getOrganizmy()){
+
+            if(org instanceof Czlowiek) return true;
+
+        }
+
+        return false;
+
+    }
+
 
     @Override
     public void paint(Graphics g){
 
         g.setColor(KOLOR_TLA);
 
-
         int rozmiarZwierzecia = wysokoscOkienka/wysokosc;
         g.fillRect(0,0,szerokosc * rozmiarZwierzecia,wysokosc * rozmiarZwierzecia);
+
+
+
 
         for(int y = 0; y < wysokosc; y++){
 
@@ -100,6 +90,12 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
             }
 
         }
+
+       if(maCzlowieka()){
+
+           czlowiekInfo(g);
+
+       }
 
 
     }
@@ -164,7 +160,13 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
                 swiat.setRuch(Swiat.Ruch.PRAWO);
                 break;
 
+            case KeyEvent.VK_Z:
+                swiat.setRuch(Swiat.Ruch.SPECJALNY);
+                break;
+
         }
+
+        paint(getGraphics());
 
     }
 
@@ -176,10 +178,46 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
 
     private static final Color KOLOR_TLA = new Color(0,0,0);
+    private static final Color KOLOR_INFO = new Color(255,200,200);
+
+    private Swiat swiat;
     private final int wysokosc;
     private final int szerokosc;
 
     private final int wysokoscOkienka;
 
+
+    private void czlowiekInfo(Graphics g){
+
+        g.setColor(KOLOR_INFO);
+        String komunikat = "Ruch czlowieka: ";
+
+        switch(swiat.getRuch()){
+
+            case GORA:
+                komunikat+="do gory";
+                break;
+            case DOL:
+                komunikat+= "na dol";
+                break;
+            case STOJ:
+                komunikat+="bedzie stal";
+                break;
+            case LEWO:
+                komunikat+="w lewo";
+                break;
+            case PRAWO:
+                komunikat+="w prawo";
+                break;
+            case SPECJALNY:
+                komunikat+="uruchomi umiejetnosc specjalna";
+                break;
+
+        }
+
+
+        g.drawString(komunikat,0,10);
+
+    }
 
 }

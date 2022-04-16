@@ -4,6 +4,8 @@ import Roagen7.com.github.pomocnicze.Dziennik;
 import Roagen7.com.github.pomocnicze.Wektor2d;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
 import Roagen7.com.github.symulacja.organizmy.Zwierze;
+import Roagen7.com.github.symulacja.organizmy.rosliny.*;
+import Roagen7.com.github.symulacja.organizmy.zwierzeta.*;
 
 import java.util.Collections;
 import java.util.Vector;
@@ -143,6 +145,50 @@ public class Swiat {
 
     }
 
+    public Ruch getRuch(){
+
+        return ruch;
+
+    }
+
+    public Vector<Organizm> getOrganizmy() {
+
+        return organizmy;
+
+    }
+
+    public static Swiat Bazowy(){
+
+
+        Swiat swiat = new Swiat(
+        30,
+                30);
+
+        swiat.addOrganizm(new Wilk(new Wektor2d(0,3)));
+        swiat.addOrganizm(new Wilk(new Wektor2d(0,4)));
+
+        swiat.addOrganizm(new Owca(new Wektor2d(6,6)));
+        swiat.addOrganizm(new Owca(new Wektor2d(7,6)));
+        swiat.addOrganizm(new Mlecz(new Wektor2d(10,10)));
+        swiat.addOrganizm(new Lis(new Wektor2d(10,5)));
+        swiat.addOrganizm(new Lis(new Wektor2d(10,6)));
+        swiat.addOrganizm(new Lis(new Wektor2d(10,7)));
+        swiat.addOrganizm(new Zolw(new Wektor2d(20,20)));
+        swiat.addOrganizm(new Trawa(new Wektor2d(20,4)));
+        swiat.addOrganizm(new Antylopa(new Wektor2d(30,5)));
+        swiat.addOrganizm(new Antylopa(new Wektor2d(30,6)));
+        swiat.addOrganizm(new Guarana(new Wektor2d(25,5)));
+        swiat.addOrganizm(new Guarana(new Wektor2d(25,6)));
+
+        swiat.addOrganizm(new WilczeJagody(new Wektor2d(0,0)));
+        swiat.addOrganizm(new WilczeJagody(new Wektor2d(1,0)));
+
+        swiat.addOrganizm(new BarszczSosnowskiego(new Wektor2d(21,24)));
+        swiat.addOrganizm(new Czlowiek(new Wektor2d(25,25)));
+
+        return swiat;
+    }
+
 
     private final int wysokosc;
     private final int szerokosc;
@@ -161,11 +207,10 @@ public class Swiat {
 
             if(o1.getInicjatywa() == o2.getInicjatywa()){
 
-                return o1.getWiek() - o2.getWiek();
+                return o2.getWiek() - o1.getWiek();
 
             }
-
-            return o1.getInicjatywa() - o2.getInicjatywa() ;
+            return o2.getInicjatywa() - o1.getInicjatywa() ;
         });
 
         for(int i = 0; i < organizmy.size(); i++){

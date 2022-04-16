@@ -11,8 +11,8 @@ public class Aplikacja extends JFrame {
 
 
     public static final String TYTUL = "Symulacja";
-    public static final int DOMYSLNA_WYSOKOSC = 800;
-    public static final int DOMYSLNA_SZEROKOSC = 800;
+    public static final int DOMYSLNA_WYSOKOSC = 600;
+    public static final int DOMYSLNA_SZEROKOSC = 600;
 
 
     public Aplikacja(int wysokosc, int szerokosc){
@@ -43,8 +43,8 @@ public class Aplikacja extends JFrame {
 
 
     private final Wizualizacja wizualizacja;
-    JButton turaButton;
-    JButton dziennikButton;
+    private JButton turaButton;
+    private JButton dziennikButton;
 
     private void inicjujMenuGorne(){
 
@@ -81,8 +81,12 @@ public class Aplikacja extends JFrame {
 
 
 
+        GridLayout layout = new GridLayout(0,2);
+        panelGuziki.setLayout(layout);
+
         panelGuziki.add(turaButton);
         panelGuziki.add(dziennikButton);
+
 
         JSplitPane splitPane = new JSplitPane();
 
