@@ -116,13 +116,11 @@ public class Swiat {
 
         for(Organizm org : organizmy){
 
-
             if(org.getPolozenie().equals(p) && org.isZywy()){
 
                 return org;
 
             }
-
 
         }
 

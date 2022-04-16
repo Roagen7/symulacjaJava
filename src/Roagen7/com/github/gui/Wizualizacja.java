@@ -4,7 +4,6 @@ import Roagen7.com.github.pomocnicze.Dziennik;
 import Roagen7.com.github.pomocnicze.Wektor2d;
 import Roagen7.com.github.symulacja.Swiat;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
-import Roagen7.com.github.symulacja.organizmy.rosliny.*;
 import Roagen7.com.github.symulacja.organizmy.zwierzeta.*;
 
 import javax.swing.*;
@@ -19,17 +18,16 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
 
 
-    public Wizualizacja(int wysokosc, int szerokosc, int wysokoscOkienka) {
+    public Wizualizacja(int wysokoscOkienka, Swiat swiat) {
 
-        this.wysokosc = wysokosc;
-        this.szerokosc = szerokosc;
+        this.wysokosc = swiat.getWysokosc();
+        this.szerokosc = swiat.getSzerokosc();
         this.wysokoscOkienka = wysokoscOkienka;
+        this.swiat = swiat;
 
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(true);
-
-       swiat = Swiat.Bazowy();
 
     }
 
@@ -69,8 +67,6 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
         int rozmiarZwierzecia = wysokoscOkienka/wysokosc;
         g.fillRect(0,0,szerokosc * rozmiarZwierzecia,wysokosc * rozmiarZwierzecia);
-
-
 
 
         for(int y = 0; y < wysokosc; y++){
