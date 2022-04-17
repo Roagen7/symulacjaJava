@@ -2,9 +2,6 @@ package Roagen7.com.github.symulacja.organizmy;
 
 import Roagen7.com.github.pomocnicze.Wektor2d;
 
-import java.awt.*;
-
-import static java.lang.Math.PI;
 import static java.lang.Math.random;
 
 abstract public class Zwierze extends Organizm{

@@ -80,6 +80,12 @@ public class Swiat {
 
     }
 
+    public void setNrTury(int nrTury) {
+
+        this.nrTury = nrTury;
+
+    }
+
     public enum Ruch {
 
         GORA,
@@ -120,17 +126,23 @@ public class Swiat {
 
     public Organizm getOrganizmNaPozycji(Wektor2d p){
 
+        Organizm szukany = null;
+
         for(Organizm org : organizmy){
 
             if(org.getPolozenie().equals(p) && org.isZywy()){
 
-                return org;
+                if(szukany == null || szukany.getSila() < org.getSila()){
+
+                    szukany = org;
+
+                }
 
             }
 
         }
 
-        return null;
+        return szukany;
 
     }
 
@@ -221,7 +233,7 @@ public class Swiat {
 
             Organizm organizm = organizmy.get(i);
 
-            if(organizm.isZywy() && organizm.getWiek() != 0){
+            if(organizm.isZywy() ){
 
                 organizm.akcja();
                 organizm.kolizja();

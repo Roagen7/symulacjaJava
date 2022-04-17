@@ -27,7 +27,7 @@ public class Lis extends Zwierze {
     }
 
     @Override
-    protected Organizm kopia() {
+    public Organizm kopia() {
         return new Lis(polozenie);
     }
 

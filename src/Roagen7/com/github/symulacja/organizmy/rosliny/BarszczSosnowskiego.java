@@ -57,7 +57,7 @@ public class BarszczSosnowskiego extends Roslina {
     }
 
     @Override
-    protected BarszczSosnowskiego kopia() {
+    public BarszczSosnowskiego kopia() {
         return new BarszczSosnowskiego(polozenie);
     }
 }

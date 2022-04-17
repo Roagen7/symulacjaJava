@@ -33,7 +33,7 @@ public class Guarana extends Roslina {
     }
 
     @Override
-    protected Guarana kopia() {
+    public Guarana kopia() {
         return new Guarana(polozenie);
     }
 }

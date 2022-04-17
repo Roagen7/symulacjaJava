@@ -29,7 +29,7 @@ public class Trawa extends Roslina {
     }
 
     @Override
-    protected Organizm kopia() {
+    public Organizm kopia() {
         return new Trawa(polozenie);
     }
 

@@ -36,7 +36,7 @@ public class Mlecz extends Roslina {
     }
 
     @Override
-    protected Mlecz kopia() {
+    public Mlecz kopia() {
         return new Mlecz(polozenie);
     }
 }

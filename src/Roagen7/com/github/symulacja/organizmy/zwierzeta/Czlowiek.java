@@ -109,7 +109,7 @@ public class Czlowiek extends Zwierze {
     }
 
     @Override
-    protected Organizm kopia() {
+    public Organizm kopia() {
         return new Czlowiek(polozenie);
     }
 

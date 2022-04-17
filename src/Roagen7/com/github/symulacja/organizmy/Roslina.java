@@ -2,8 +2,6 @@ package Roagen7.com.github.symulacja.organizmy;
 
 import Roagen7.com.github.pomocnicze.Wektor2d;
 
-import java.awt.*;
-
 import static java.lang.Math.random;
 
 public abstract class Roslina extends Organizm{

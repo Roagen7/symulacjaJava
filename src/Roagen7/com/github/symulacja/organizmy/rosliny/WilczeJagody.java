@@ -32,7 +32,7 @@ public class WilczeJagody extends Roslina {
     }
 
     @Override
-    protected WilczeJagody kopia() {
+    public WilczeJagody kopia() {
         return new WilczeJagody(polozenie);
     }
 }

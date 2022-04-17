@@ -1,7 +1,6 @@
 package Roagen7.com.github.symulacja.organizmy.zwierzeta;
 
 import Roagen7.com.github.pomocnicze.Wektor2d;
-import Roagen7.com.github.symulacja.organizmy.Organizm;
 import Roagen7.com.github.symulacja.organizmy.Zwierze;
 
 import java.awt.*;
@@ -28,7 +27,7 @@ public class Wilk extends Zwierze {
     }
 
     @Override
-    protected Wilk kopia() {
+    public Wilk kopia() {
         return new Wilk(polozenie);
     }
 }

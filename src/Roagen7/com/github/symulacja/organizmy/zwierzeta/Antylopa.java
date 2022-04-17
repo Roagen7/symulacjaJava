@@ -1,7 +1,6 @@
 package Roagen7.com.github.symulacja.organizmy.zwierzeta;
 
 import Roagen7.com.github.pomocnicze.Wektor2d;
-import Roagen7.com.github.symulacja.organizmy.Organizm;
 import Roagen7.com.github.symulacja.organizmy.Zwierze;
 
 import java.awt.*;
@@ -40,7 +39,7 @@ public class Antylopa extends Zwierze {
     }
 
     @Override
-    protected Antylopa kopia() {
+    public Antylopa kopia() {
         return new Antylopa(polozenie);
     }
 

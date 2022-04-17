@@ -50,7 +50,7 @@ public class Zolw extends Zwierze {
     }
 
     @Override
-    protected Zolw kopia() {
+    public Zolw kopia() {
         return new Zolw(polozenie);
     }
 }

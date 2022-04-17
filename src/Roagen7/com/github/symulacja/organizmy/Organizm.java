@@ -126,7 +126,7 @@ abstract public class Organizm {
 
     public abstract void nowaTura();
 
-
+    public abstract Organizm kopia();
 
     protected int sila;
     protected int inicjatywa;
@@ -153,7 +153,7 @@ abstract public class Organizm {
     }
 
 
-    abstract protected Organizm kopia();
+
 
 
 }

@@ -95,6 +95,33 @@ public class Aplikacja extends JFrame {
 
         });
 
+        menuItemWczytaj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JFileChooser fc = new JFileChooser();
+                fc.setDialogTitle("wybierz plik do wczytania");
+
+                int rv = fc.showOpenDialog(null);
+
+                if(rv == JFileChooser.APPROVE_OPTION){
+
+                    File plik = fc.getSelectedFile();
+                    Swiat sw = menedzerPlikow.wczytaj(plik);
+
+                    if(sw != null){
+
+                        wizualizacja.setSwiat(sw);
+
+                    }
+
+                }
+
+
+            }
+
+        });
+
         menuItemZapisz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
