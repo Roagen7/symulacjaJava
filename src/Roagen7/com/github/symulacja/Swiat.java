@@ -74,6 +74,12 @@ public class Swiat {
 
     }
 
+    public int getNrTury() {
+
+        return nrTury;
+
+    }
+
     public enum Ruch {
 
         GORA,

@@ -101,6 +101,13 @@ public class Czlowiek extends Zwierze {
         return new Color(255,253,150);
     }
 
+
+    public int getTurySpecjalne() {
+
+        return turySpecjalne;
+
+    }
+
     @Override
     protected Organizm kopia() {
         return new Czlowiek(polozenie);
