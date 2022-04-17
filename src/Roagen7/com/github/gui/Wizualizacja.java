@@ -37,6 +37,16 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
     }
 
+    public void setSwiat(Swiat swiat) {
+
+        this.swiat = swiat;
+        this.szerokosc = swiat.getSzerokosc();
+        this.wysokosc = swiat.getWysokosc();
+
+        paint(this.getGraphics());
+
+
+    }
 
     public void nastepnaTura(){
 
@@ -177,8 +187,8 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
     private static final Color KOLOR_INFO = new Color(255,200,200);
 
     private Swiat swiat;
-    private final int wysokosc;
-    private final int szerokosc;
+    private int wysokosc;
+    private int szerokosc;
 
     private final int wysokoscOkienka;
 

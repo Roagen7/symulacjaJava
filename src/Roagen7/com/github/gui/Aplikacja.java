@@ -56,6 +56,17 @@ public class Aplikacja extends JFrame {
 
         JMenuItem menuItemBazowy = new JMenuItem("bazowy");
 
+        menuItemBazowy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                wizualizacja.setSwiat(Swiat.Bazowy());
+
+            }
+
+        });
+
+
         menuNowy.add(menuItemBazowy);
 
         JMenuItem menuItemWczytaj = new JMenuItem("wczytaj");
