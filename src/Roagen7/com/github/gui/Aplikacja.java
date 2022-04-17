@@ -1,11 +1,15 @@
 package Roagen7.com.github.gui;
 
+import Roagen7.com.github.pomocnicze.MenedzerPlikow;
 import Roagen7.com.github.symulacja.Swiat;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class Aplikacja extends JFrame {
 
@@ -26,9 +30,12 @@ public class Aplikacja extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         wizualizacja = new Wizualizacja(DOMYSLNA_WYSOKOSC * 9/10, Swiat.Bazowy());
+        menedzerPlikow = new MenedzerPlikow();
+
 
         inicjujMenuGorne();
         inicjujPanelGlowny();
+
 
 
     }
@@ -43,8 +50,14 @@ public class Aplikacja extends JFrame {
 
 
     private final Wizualizacja wizualizacja;
+    private final MenedzerPlikow menedzerPlikow;
+
     private JButton turaButton;
     private JButton dziennikButton;
+    private JMenuItem menuItemBazowy;
+    private JMenuItem menuItemWczytaj;
+    private JMenuItem menuItemZapisz;
+
 
     private void inicjujMenuGorne(){
 
@@ -53,8 +66,24 @@ public class Aplikacja extends JFrame {
         JMenu menuNowy = new JMenu("Nowy");
         JMenu menuPlik = new JMenu("Plik");
 
+        inicjujGuzikiMenuGornego();
 
-        JMenuItem menuItemBazowy = new JMenuItem("bazowy");
+        menuNowy.add(menuItemBazowy);
+        menuPlik.add(menuItemWczytaj);
+        menuPlik.add(menuItemZapisz);
+
+        menuBar.add(menuNowy);
+        menuBar.add(menuPlik);
+
+        setJMenuBar(menuBar);
+
+    }
+
+    private void inicjujGuzikiMenuGornego(){
+
+        menuItemBazowy = new JMenuItem("bazowy");
+        menuItemWczytaj = new JMenuItem("wczytaj");
+        menuItemZapisz = new JMenuItem("zapisz");
 
         menuItemBazowy.addActionListener(new ActionListener() {
             @Override
@@ -66,22 +95,29 @@ public class Aplikacja extends JFrame {
 
         });
 
+        menuItemZapisz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-        menuNowy.add(menuItemBazowy);
+                JFileChooser fc = new JFileChooser();
+                fc.setDialogTitle("wybierz plik do zapisu");
 
-        JMenuItem menuItemWczytaj = new JMenuItem("wczytaj");
-        JMenuItem menuItemZapisz = new JMenuItem("zapisz");
+                int rv = fc.showOpenDialog(null);
 
-        menuPlik.add(menuItemWczytaj);
-        menuPlik.add(menuItemZapisz);
+                if(rv == JFileChooser.APPROVE_OPTION){
 
+                    File plik = fc.getSelectedFile();
+                    menedzerPlikow.zapisz(wizualizacja.getSwiat(), plik);
 
-        menuBar.add(menuNowy);
-        menuBar.add(menuPlik);
+                }
 
-        setJMenuBar(menuBar);
+            }
+
+        });
+
 
     }
+
 
     private void inicjujPanelGlowny(){
 

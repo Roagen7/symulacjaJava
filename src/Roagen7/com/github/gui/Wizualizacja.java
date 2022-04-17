@@ -182,6 +182,13 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
     }
 
 
+    public Swiat getSwiat() {
+
+        return swiat;
+
+    }
+
+
 
     private static final Color KOLOR_TLA = new Color(0,0,0);
     private static final Color KOLOR_INFO = new Color(255,200,200);
