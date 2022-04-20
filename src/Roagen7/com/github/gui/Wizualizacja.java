@@ -4,14 +4,12 @@ import Roagen7.com.github.pomocnicze.Dziennik;
 import Roagen7.com.github.pomocnicze.Wektor2d;
 import Roagen7.com.github.symulacja.Swiat;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
+import Roagen7.com.github.symulacja.organizmy.rosliny.*;
 import Roagen7.com.github.symulacja.organizmy.zwierzeta.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
@@ -25,11 +23,62 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
         this.wysokoscOkienka = wysokoscOkienka;
         this.swiat = swiat;
 
+        this.nowePolozenie = new Wektor2d(0,0);
+
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(true);
 
+        inicjujPopupMenu();
+
     }
+
+    private void inicjujPopupMenu(){
+
+        nowyOrganizmMenu = new JPopupMenu();
+
+        Wektor2d p0 = new Wektor2d(0,0);
+
+        Organizm[] organizmy = {
+
+                new Wilk(p0),
+                new Owca(p0),
+                new Lis(p0),
+                new Zolw(p0),
+                new Antylopa(p0),
+                new Trawa(p0),
+                new Mlecz(p0),
+                new Guarana(p0),
+                new WilczeJagody(p0),
+                new BarszczSosnowskiego(p0)
+
+        };
+
+
+        for(Organizm el : organizmy){
+
+            JMenuItem elMenu = new JMenuItem(el.toString());
+
+            elMenu.setBackground(el.rysowanie());
+
+            elMenu.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+
+                    polozOrganizm(el);
+
+                }
+
+            });
+
+            nowyOrganizmMenu.add(elMenu);
+
+        }
+
+
+
+    }
+
 
     public Dziennik getDziennik(){
 
@@ -75,7 +124,7 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
         g.setColor(KOLOR_TLA);
 
-        int rozmiarZwierzecia = wysokoscOkienka/wysokosc;
+        rozmiarZwierzecia = wysokoscOkienka/wysokosc;
         g.fillRect(0,0,szerokosc * rozmiarZwierzecia,wysokosc * rozmiarZwierzecia);
 
 
@@ -113,7 +162,9 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
         int x = mouseEvent.getX();
         int y = mouseEvent.getY();
 
-        System.out.println(y + " " + x);
+        nowePolozenie = new Wektor2d(y/rozmiarZwierzecia,x/rozmiarZwierzecia);
+
+        nowyOrganizmMenu.show(this,x,y);
 
     }
 
@@ -193,11 +244,17 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
     private static final Color KOLOR_TLA = new Color(0,0,0);
     private static final Color KOLOR_INFO = new Color(255,200,200);
 
+    private JPopupMenu nowyOrganizmMenu;
+
     private Swiat swiat;
     private int wysokosc;
     private int szerokosc;
 
+    private Wektor2d nowePolozenie;
+
     private final int wysokoscOkienka;
+
+    private int rozmiarZwierzecia;
 
 
     private void czlowiekInfo(Graphics g){
@@ -230,6 +287,27 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
 
         g.drawString(komunikat,0,10);
+
+    }
+
+
+    private void polozOrganizm(Organizm org){
+
+        Organizm kolidujacy = swiat.getOrganizmNaPozycji(nowePolozenie);
+
+        while(kolidujacy != null){
+
+            kolidujacy.zabij();
+
+            kolidujacy = swiat.getOrganizmNaPozycji(nowePolozenie);
+
+        }
+
+
+        org.setPolozenie(nowePolozenie);
+        swiat.addOrganizm(org.kopia());
+
+        paint(getGraphics());
 
     }
 
