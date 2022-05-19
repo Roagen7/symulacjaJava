@@ -29,14 +29,11 @@ public class Aplikacja extends JFrame {
         setTitle(TYTUL);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        wizualizacja = new Wizualizacja(DOMYSLNA_WYSOKOSC * 9/10, Swiat.Bazowy());
+        wizualizacja = new Wizualizacja(DOMYSLNA_WYSOKOSC * 8/10, Swiat.Bazowy());
         menedzerPlikow = new MenedzerPlikow();
-
 
         inicjujMenuGorne();
         inicjujPanelGlowny();
-
-
 
     }
 
@@ -165,7 +162,7 @@ public class Aplikacja extends JFrame {
         JSplitPane splitPane = new JSplitPane();
 
         splitPane.setEnabled(false);
-        splitPane.setDividerLocation( DOMYSLNA_WYSOKOSC * 9 / 10);
+        splitPane.setDividerLocation( DOMYSLNA_WYSOKOSC * 8 / 10);
         splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
         splitPane.addMouseListener(wizualizacja);

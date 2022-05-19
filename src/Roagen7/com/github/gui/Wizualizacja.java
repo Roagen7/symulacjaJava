@@ -13,9 +13,6 @@ import java.awt.event.*;
 
 public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
-
-
-
     public Wizualizacja(int wysokoscOkienka, Swiat swiat) {
 
         this.wysokosc = swiat.getWysokosc();
