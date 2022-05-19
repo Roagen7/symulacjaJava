@@ -82,7 +82,7 @@ abstract public class Zwierze extends Organizm{
 
     protected void zmienPolozenie(Wektor2d przemieszczenie){
 
-        if(swiat.getTyp() == Swiat.Typ.Hex && (przemieszczenie == new Wektor2d(-1,-1) || przemieszczenie == new Wektor2d(1,-1))){
+        if(swiat.getTyp() == Swiat.Typ.Hex && (przemieszczenie.equals(new Wektor2d(-1,-1)) || przemieszczenie.equals(new Wektor2d(1,-1)))){
 
             return;
 

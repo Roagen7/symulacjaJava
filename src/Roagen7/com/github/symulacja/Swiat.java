@@ -114,14 +114,14 @@ public class Swiat {
     }
 
 
-    public Swiat(int wysokosc, int szerokosc){
+    public Swiat(int wysokosc, int szerokosc, Typ typ){
 
         this.wysokosc = wysokosc;
         this.szerokosc = szerokosc;
         organizmy = new Vector<>();
         dziennik = new Dziennik();
 
-        typ = Typ.Hex;
+        this.typ = typ;
 
     }
 
@@ -195,12 +195,12 @@ public class Swiat {
 
     }
 
-    public static Swiat Bazowy(){
+    public static Swiat Bazowy(Typ typ){
 
 
         Swiat swiat = new Swiat(
         30,
-                30);
+                30, typ);
 
         swiat.addOrganizm(new Wilk(new Wektor2d(0,3)));
         swiat.addOrganizm(new Wilk(new Wektor2d(0,4)));

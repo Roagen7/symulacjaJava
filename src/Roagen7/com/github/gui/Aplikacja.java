@@ -29,7 +29,7 @@ public class Aplikacja extends JFrame {
         setTitle(TYTUL);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        wizualizacja = new Wizualizacja(DOMYSLNA_WYSOKOSC * 8/10, Swiat.Bazowy());
+        wizualizacja = new Wizualizacja(DOMYSLNA_WYSOKOSC * 8/10, Swiat.Bazowy(Swiat.Typ.Hex));
         menedzerPlikow = new MenedzerPlikow();
 
         inicjujMenuGorne();
@@ -52,6 +52,9 @@ public class Aplikacja extends JFrame {
     private JButton turaButton;
     private JButton dziennikButton;
     private JMenuItem menuItemBazowy;
+
+    private JMenuItem menuItemBazowyHex;
+
     private JMenuItem menuItemWczytaj;
     private JMenuItem menuItemZapisz;
 
@@ -66,6 +69,8 @@ public class Aplikacja extends JFrame {
         inicjujGuzikiMenuGornego();
 
         menuNowy.add(menuItemBazowy);
+        menuNowy.add(menuItemBazowyHex);
+
         menuPlik.add(menuItemWczytaj);
         menuPlik.add(menuItemZapisz);
 
@@ -78,7 +83,8 @@ public class Aplikacja extends JFrame {
 
     private void inicjujGuzikiMenuGornego(){
 
-        menuItemBazowy = new JMenuItem("bazowy");
+        menuItemBazowy = new JMenuItem("bazowy_kartezjanski");
+        menuItemBazowyHex = new JMenuItem("bazowy_hex");
         menuItemWczytaj = new JMenuItem("wczytaj");
         menuItemZapisz = new JMenuItem("zapisz");
 
@@ -86,10 +92,20 @@ public class Aplikacja extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                wizualizacja.setSwiat(Swiat.Bazowy());
+                wizualizacja.setSwiat(Swiat.Bazowy(Swiat.Typ.Kartezjanski));
 
             }
 
+        });
+
+
+        menuItemBazowyHex.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                wizualizacja.setSwiat(Swiat.Bazowy(Swiat.Typ.Hex));
+
+            }
         });
 
         menuItemWczytaj.addActionListener(new ActionListener() {

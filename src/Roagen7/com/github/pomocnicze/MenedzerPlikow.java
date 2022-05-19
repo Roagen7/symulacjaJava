@@ -18,7 +18,12 @@ public class MenedzerPlikow {
             FileWriter out = new FileWriter(plik);
 
 
-            out.write(swiat.getNrTury() + " " + swiat.getWysokosc() + " " + swiat.getSzerokosc() + "\n");
+
+            String typStr = swiat.getTyp().equals(Swiat.Typ.Hex) ? "HEX" : "KART";
+
+
+
+            out.write(swiat.getNrTury() + " " + swiat.getWysokosc() + " " + swiat.getSzerokosc()  + " " + typStr+ "\n");
 
             for(Organizm org : swiat.getOrganizmy()){
 
@@ -58,7 +63,17 @@ public class MenedzerPlikow {
 
             String[] turaWysSzer = in.readLine().split(" ");
 
-            Swiat sw = new Swiat(Integer.parseInt(turaWysSzer[1]),Integer.parseInt(turaWysSzer[2]));
+            Swiat.Typ typ = Swiat.Typ.Kartezjanski;
+
+            if(turaWysSzer[3].equals("HEX")){
+
+                typ = Swiat.Typ.Hex;
+
+            }
+
+
+
+            Swiat sw = new Swiat(Integer.parseInt(turaWysSzer[1]),Integer.parseInt(turaWysSzer[2]), typ);
             sw.setNrTury(Integer.parseInt(turaWysSzer[0]));
 
 
