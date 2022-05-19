@@ -1,6 +1,7 @@
 package Roagen7.com.github.symulacja.organizmy;
 
 import Roagen7.com.github.pomocnicze.Wektor2d;
+import Roagen7.com.github.symulacja.Swiat;
 
 import static java.lang.Math.random;
 
@@ -80,6 +81,13 @@ abstract public class Zwierze extends Organizm{
     }
 
     protected void zmienPolozenie(Wektor2d przemieszczenie){
+
+        if(swiat.getTyp() == Swiat.Typ.Hex && (przemieszczenie == new Wektor2d(-1,-1) || przemieszczenie == new Wektor2d(1,-1))){
+
+            return;
+
+        }
+
 
         if(!polozenie.dodaj(przemieszczenie).pozaGranicami(swiat.getWysokosc(),swiat.getSzerokosc())){
 

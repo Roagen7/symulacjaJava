@@ -3,11 +3,9 @@ package Roagen7.com.github.symulacja;
 import Roagen7.com.github.pomocnicze.Dziennik;
 import Roagen7.com.github.pomocnicze.Wektor2d;
 import Roagen7.com.github.symulacja.organizmy.Organizm;
-import Roagen7.com.github.symulacja.organizmy.Zwierze;
 import Roagen7.com.github.symulacja.organizmy.rosliny.*;
 import Roagen7.com.github.symulacja.organizmy.zwierzeta.*;
 
-import java.util.Collections;
 import java.util.Vector;
 
 public class Swiat {
@@ -51,6 +49,13 @@ public class Swiat {
 
                 Wektor2d sprawdzanyPunkt = new Wektor2d(p.getY() + dy, p.getX() + dx);
 
+                if(typ == Typ.Hex && ((dy == -1 && dx == -1) || (dy == 1 && dx == -1))){
+
+                    continue;
+
+                }
+
+
                 if(!sprawdzanyPunkt.equals(p)
                 && getOrganizmNaPozycji(sprawdzanyPunkt) == null
                 && !sprawdzanyPunkt.pozaGranicami(wysokosc,szerokosc)){
@@ -86,6 +91,10 @@ public class Swiat {
 
     }
 
+    public Typ getTyp() {
+        return typ;
+    }
+
     public enum Ruch {
 
         GORA,
@@ -97,6 +106,14 @@ public class Swiat {
 
     }
 
+    public enum Typ {
+
+        Kartezjanski,
+        Hex
+
+    }
+
+
     public Swiat(int wysokosc, int szerokosc){
 
         this.wysokosc = wysokosc;
@@ -104,7 +121,12 @@ public class Swiat {
         organizmy = new Vector<>();
         dziennik = new Dziennik();
 
+        typ = Typ.Hex;
+
     }
+
+
+
 
     public void wykonajTure(){
 
@@ -211,6 +233,7 @@ public class Swiat {
 
     private int nrTury;
     private Ruch ruch = Ruch.STOJ;
+    private Typ typ = Typ.Kartezjanski;
 
     private Dziennik dziennik;
 

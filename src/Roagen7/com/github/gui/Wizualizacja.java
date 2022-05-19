@@ -125,6 +125,8 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
         g.fillRect(0,0,szerokosc * rozmiarZwierzecia,wysokosc * rozmiarZwierzecia);
 
 
+
+
         for(int y = 0; y < wysokosc; y++){
 
             for(int x = 0; x < szerokosc; x++){
@@ -135,7 +137,37 @@ public class Wizualizacja extends JPanel implements MouseListener, KeyListener {
 
                     g.setColor(org.rysowanie());
 
-                    g.fillRect(x* rozmiarZwierzecia,y* rozmiarZwierzecia, rozmiarZwierzecia, rozmiarZwierzecia);
+                    if(swiat.getTyp() == Swiat.Typ.Kartezjanski){
+
+                        g.fillRect(x* rozmiarZwierzecia,y* rozmiarZwierzecia, rozmiarZwierzecia, rozmiarZwierzecia);
+
+                    } else {
+
+                        int[] xPoints = new int[6];
+                        int[] yPoints = new int[6];
+
+                        double xtemp = x;
+
+                        if(y %2 == 0){
+
+                            xtemp = x + 0.5;
+
+                        }
+
+                        for (int i = 0; i < 6; i++) {
+                            int xval = (int) (xtemp * rozmiarZwierzecia + rozmiarZwierzecia/2
+                                    * Math.sin(i * 2 * Math.PI / 6D));
+                            int yval = (int) (y * rozmiarZwierzecia + rozmiarZwierzecia/2
+                                    * Math.cos(i * 2 * Math.PI / 6D));
+
+                            xPoints[i] = xval;
+                            yPoints[i] = yval;
+
+                        }
+
+                        g.fillPolygon(xPoints, yPoints, yPoints.length);
+
+                    }
 
                 }
 
